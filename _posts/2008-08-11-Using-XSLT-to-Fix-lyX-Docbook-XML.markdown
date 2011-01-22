@@ -10,5 +10,5 @@ on how to use lyX to produce Docbook XML which can be transformed
 into XHTML or PDF documents. This tutorial shows how to
 leverage XML technologies, such as XSL, to create customized versions
 of Docbook XSL stylesheets that fix some of lyX's Docbook problems.
-The tutorial can be read [here](tutorials/lyx-and-docbookXML).
+The tutorial can be read [here](/tutorials/lyx-and-docbookXML).
 

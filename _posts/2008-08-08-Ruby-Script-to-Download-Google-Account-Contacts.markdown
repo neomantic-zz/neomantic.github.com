@@ -5,6 +5,6 @@ layout: post
 I have just released a Ruby Script that will download your
  Google Contacts using their Contacts API.
 
-* [downloadGoogleContacts.rb](software/ruby-google-contacts/)
+* [downloadGoogleContacts.rb](/software/ruby-google-contacts/)
 
 Enjoy!
