@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>GEDCOM 5.5 XML</title>
+    <meta name="description" content="" />
+</head>
+<body>
+<h1>GEDCOM 5.5 XML</h1>
+<p>The genealogical markup language that I call "GEDCOM 5.5 XML"
+and the XML schema that I wrote to describe it are the result of
+a personal project. I had a GEDCOM file, full of my family's
+history. It was produced by the Open Source program <a class=
+"ulink" href="http://lifelines.sourceforge.net/">Lifelines</a>, which requires users to manually enter
+genealogical data line by GEDCOM line. It performs no error
+checking. As my GEDCOM file grew to 20,000 lines, I decided to
+clean it up and correct all its syntax errors.</p>
+
+<p>I knew that if I could convert my file into a <a class="ulink"
+href="http://www.w3.org/XML/">XML</a> document, I
+could validate it, in the XML sense, and find all the syntax
+errors. I simply needed to run the XML file through a validation
+parser, testing it against a <a class="ulink" href=
+"http://www.w3.org/TR/REC-xml/#dt-doctype">DTD</a>
+description of the markup language.</p>
+
+<p>I thought I found my solution in <a class="ulink" href=
+"http://homepage.ntlworld.com/michael.h.kay/gedml/">GedML</a>, a genealogical XML markup language <a class=
+"ulink" href=
+"http://lists.xml.org/archives/xml-dev/199804/msg00282.html">proposed</a> by Michael H. Kay of Saxon fame. He
+released a <a class="ulink" href=
+"http://users.breathe.com/mhkay/gedml/dtd.html">DTD</a> that describes this markup language. He also
+released a <a class="ulink" href=
+"http://homepage.ntlworld.com/michael.h.kay/gedml/">Java program</a> that could convert a GEDCOM file into a
+XML document. The DTD, however, did not describe the markup
+language produced by the converter. It couldn't be used to
+validate a converted GEDCOM file.</p>
+
+<p>The markup language produced by his converter, though, is
+quite simple: all GEDCOM tags are translated into XML elements;
+open and closed elements delimit the data; and the elements are
+nested in the same way prescribed by the <a class="ulink" href=
+"http://homepages.rootsweb.com/~pmcbride/gedcom/55gctoc.htm">GEDCOM</a> specification. The markup diverges from
+the specification with respect to the <code class=
+"literal">TRLR</code> tag. Kay's converter eliminates this tag
+which indicates the end of a GEDCOM file. Kay probably considered
+this element unnecessary because a closed XML document root
+element serves the same purpose.</p>
+
+<p>All I needed, then, was a XML schema that described the markup
+produced by the converter. I ruled out a DTD; it couldn't capture
+all of the restrictions prescribed by the GEDCOM specification. I
+wrote, instead, a XML schema in <a class="ulink" href=
+"http://www.oasis-open.org/committees/relax-ng/spec-20011203.html"
+>RELAX NG</a> and embedded <a class="ulink" href=
+"http://www.schematron.com/">Schematron</a> rules
+in it.</p>
+
+<p>The resulting schema almost completely describes the full
+GEDCOM 5.5 specification in XML markup. There are, however, a few
+places where it does not. These are duly noted in the
+documentation below. Since the schema has a few shortcomings, I
+have designated it version "0.1". When the schema describes 100
+percent of the GEDCOM 5.5 specification, the version number will
+be incremented to "1.0".</p>
+
+<p>I call the XML markup described by the schema "GEDCOM 5.5
+XML". This name differentiates it from Kay's GedML, with its
+limited DTD and with its implementation that leaves out the <code
+class="literal">TRLR</code> tag. GEDCOM 5.5 XML attempts to be a
+100 percent one-to-one translation of GEDCOM 5.5 into XML; it
+even includes the superfluous (and empty) <code class=
+"literal">&lt;TRLR/&gt;</code> element.</p>
+
+<p>The source code for the schema and its documentation can be
+found using the hyperlinks below. All source code is released
+using the <a class="ulink" href=
+"http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License Version 2</a>.</p>
+<h3>GEDCOM 5.5 XML version 0.1</h3>
+<ul>
+<li>
+<p><a class="ulink" href="http://www.neomantic.com/gedcom55XML/0.1/README.html">Documentation and HOWTO</a></p>
+</li>
+<li>
+<p>Version 0.1 RELAX NG/Schematron Schema</p>
+<ul>
+<li>
+<p><a class="ulink" href="http://www.neomantic.com/gedcom55XML/0.1/gedcom55XML.rng">XML Version</a></p>
+</li>
+<li>
+<p><a class="ulink" href="http://www.neomantic.com/gedcom55XML/0.1/gedcom55XML.rnc">Compact Syntax Version</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a class="ulink" href="http://www.neomantic.com/gedcom55XML/0.1/gedcom55XML-0.1.tar.gz">A tar, gzipped archive with schemas and
+documentation</a>.</p>
+</li>
+<li>
+<p><a class="ulink" href="http://www.neomantic.com/gedcom55XML/0.1/gedcom55XML-0.1.tar.gz.sign">GPG signature of tar, gzipped archive</a>.</p>
+</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>SISC Scheme on Android's Dalvik VM</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div xml:lang="en_US" class="article" title="SISC Scheme on Android's Dalvik VM" lang="en_US"><div class="titlepage"><div><div><h2 class="title"><a id="id2629124"></a>SISC Scheme on Android's Dalvik VM</h2></div></div><hr /></div><div class="sect1" title="JRuby and Scheme"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2671283"></a>JRuby and Scheme</h2></div></div></div><p>The <a class="ulink" href="http://jruby.org" target="_top">JRuby</a> guys seem to be having all the fun when it comes
+  to getting a dynamic language to run on Google's <a class="ulink" href="http://developer.android.com/index.html" target="_top">Android OS</a>. As James Nutter
+  put it on <a class="ulink" href="http://blog.headius.com/2010/01/busy-week-jruby-with-android-maven-rake.html" target="_top">this blog post,</a></p><div class="blockquote"><blockquote class="blockquote"><p>"I realized very recently that JRuby is just about the
+    only mainstream JVM languge that can create *new* code while
+    running on the device, which opens up a whole host of
+    possibilities. It is not possible to implement an interactive
+    shell in Groovy or Scala or Clojure, for example, since they
+    all must first compile code to JVM bytecode, and JVM bytecode
+    can't run on the Dalvik VM directly."</p></blockquote></div><p>While not a 'major' JVM language, I wanted to see if I could get Scheme to perform the same feat on
+  the <a class="ulink" href="http://en.wikipedia.org/wiki/Dalvik_virtual_machine" target="_top">Dalvik VM</a>.  I started
+  exploring Java implementations of Scheme. There are two prominent
+  ones:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      <a class="ulink" href="http://www.gnu.org/software/kawa/" target="_top">Kawa</a></p></li><li class="listitem"><p>
+      <a class="ulink" href="http://sisc-scheme.org/" target="_top">SISC</a></p></li></ul></div><p>Kawa is promising, and <a class="ulink" href="http://per.bothner.com/blog/2009/AndroidHelloScheme/" target="_top"> it's author already managed to get it to work on Android</a>. Kawa Scheme code, though, must be compiled to Java bytecode
+  to run on the JVM, and so too for the Dalvik VM.</p><p>To get Scheme to perform like JRuby, I turned
+  to SISC, which does not require Scheme to be byte compiled to run
+  on the JVM. Like JRuby, SISC offers a fully interactive REPL
+  which can be used to instantiate Java classes 'on the fly.'
+  </p><p>I managed to bring up SISC Scheme's REPL on an Android
+  emulator by following the troubleshooting hints I found in these
+  two posts, <a class="ulink" href="http://blog.headius.com/2009/02/ruboto-is-your-friend.html" target="_top">
+  the first on JRuby</a> and <a class="ulink" href="http://jameswilliams.be/blog/entry/tags/Android" target="_top">
+  the second on groovy</a>.</p><p>Here's what I did:</p></div><div class="sect1" title="1. Installation"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2629703"></a>1. Installation</h2></div></div></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Downloaded and compiled SISC source code (probably
+      unnecessary, since I only needed the jars)</p></li><li class="listitem"><p>Converted SISC's jars (
+      <code class="filename">sisc-opt.jar</code>,
+      <code class="filename">sisc.jar</code>,
+      <code class="filename">sisc-lib.jar</code>,
+      <code class="filename">sisc-heap.jar</code>) to Dalvik bytecode. I
+      used the
+      <code class="literal">dx</code> tool in
+      <code class="filename">platforms/android-2.0.1/tools</code>
+      because I wanted SISC to run on the lastest Android release.</p><p>
+        </p><pre class="screen"><span class="command"><strong>dx --dex --output ~/sisc.jar &lt;path to sisc source&gt;/sisc.jar</strong></span></pre><p>
+      </p></li><li class="listitem"><p>Created a 2.0.1 emulator image using the <code class="filename">android</code> tool and
+      called the image 'sisc'</p></li><li class="listitem"><p>Started up the emulator:</p><p>
+        </p><pre class="screen"><span class="command"><strong>emulator -avd sisc</strong></span></pre><p>
+      </p></li><li class="listitem"><p>Added all the converted SISC jars into the 'data'
+      folder under the root directory:
+      <code class="filename">/data</code>. For
+      example,</p><p>
+        </p><pre class="screen"><span class="command"><strong>adb push sisc.jar data/sisc.jar</strong></span></pre><p>
+      </p></li><li class="listitem"><p>Invoked the remote Android shell using
+      <code class="literal">adb</code>:</p><p>
+        </p><pre class="screen"><span class="command"><strong>adb shell</strong></span></pre><p>
+      </p></li></ol></div><p>First I attempted to see if SISC would return its version
+  number by using the following command, gleaned from the sisc.sh
+  shell script that comes with SISC's jar/source.
+  </p><pre class="screen"><span class="command"><strong>dalvikvm -classpath /data/sisc-opt.jar:/data/sisc.jar:/data/sisc-lib.jar:/data/sisc-heap.jar -Dsisc.home=/data sisc.REPL -v</strong></span></pre><p>
+</p><p>This was successful. It reported:</p><p>
+  </p><pre class="screen"><code class="computeroutput">
+"SISC - The Second Interpreter of Scheme Code - 1.17.0-alpha"
+</code></pre><p>Next I attempted to invoke the SISC REPL by leaving off the
+  <code class="literal">-v</code> flag.
+  </p><pre class="screen"><span class="command"><strong>dalvikvm -classpath /data/sisc-opt.jar:/data/sisc.jar:/data/sisc-lib.jar:/data/sisc-heap.jar -Dsisc.home=/data sisc.REPL</strong></span></pre><p>
+  </p><p>That failed.</p><p>In the shell, I looked through the log using
+  <code class="literal">logcat</code>. I discovered that SISC needed the
+  java.beans.Introspector class. This led me to the next
+  steps.</p><div class="orderedlist"><ol class="orderedlist" start="7" type="1"><li class="listitem"><p>Following the groovy blog post, I extracted the
+      java.beans classes from Sun's
+      <code class="filename">rt.jar</code>, and then created a jar of them
+      using the jar command line tool.</p><p>
+        </p><pre class="screen"><span class="command"><strong>jar cvf javabeans.jar java/beans</strong></span></pre><p>
+      </p></li><li class="listitem"><p>Converted the classes in this jar to Dalvik
+      bytecode. Since Android ships with a subset of the java.beans
+      classes, <code class="literal">dx</code> emits a serious (and amusing message) about
+      converting core libraries into Dalvik bytecode. I quote: "the
+      path you are on will ultimately lead to pain, suffering,
+      grief, and lamentation." Sounds good to me. I overrode
+      the error message by using the
+      <code class="literal">--core-library</code> flag.</p><p>
+        </p><pre class="screen"><span class="command"><strong>dx --dex --core-library -output ~/javabeans.jar javabeans.jar</strong></span></pre><p>
+      </p></li><li class="listitem"><p>Pushed this jar into the data directory of the android
+      emulator, using
+      <span class="command"><strong>adb push</strong></span></p></li></ol></div><p>When I included this jar in the class path, sisc.REPL
+  failed again. Checking
+  <code class="literal">logcat</code> and following the chain of dependencies,
+  I did the following:</p><div class="orderedlist"><ol class="orderedlist" start="10" type="1"><li class="listitem"><p>Added Sun's reflection classes (under sun/reflect) by
+      combining them into a jar file, converting the class
+      files in this jar to Dalvik bytecode with dx, and saving it
+      into a jar called:
+      <code class="filename">sunreflect.jar</code>.</p></li><li class="listitem"><p>Added Sun's awt classes (under sun/awt), following the
+      method in the previous step and producing the file called:
+      <code class="filename">sunawt.jar</code>.</p></li><li class="listitem"><p>Pushed them into the emulator's data directory.</p></li></ol></div><p>I tried to bring up SISC's REPL with the following command
+  (yes, I know it could be shorter):
+  </p><pre class="screen"><span class="command"><strong>dalvikvm -classpath /data/javabeans.jar:/data/sunreflect.jar:/data/sunawt.jar:/data/sisc-opt.jar:/data/sisc.jar:/data/sisc-lib.jar:/data/sisc-heap.jar -Dsisc.home=/data sisc.REPL</strong></span></pre><p>Success! After some warning message about the BufferReader
+  constructor, I got the REPL:</p><p>
+    </p><pre class="screen">
+      <code class="computeroutput">Feb 6, 2010 2:51:56 PM java.io.BufferedReader &lt;init&gt;</code>
+      <code class="computeroutput">INFO: Default buffer size used in BufferedReader constructor. It would be better to be explicit if an 8k-char buffer is required.</code>
+      <code class="computeroutput">SISC (1.17.0-alpha)</code>
+      <code class="computeroutput">#;&gt;</code>
+    </pre><p>
+  </p></div><div class="sect1" title="2. Tests"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2629346"></a>2. Tests</h2></div></div></div><div class="sect2" title="2.1 Simple Scheme"><div class="titlepage"><div><div><h3 class="title"><a id="id2629351"></a>2.1 Simple Scheme</h3></div></div></div><p>Now I decided to test if the REPL actually worked. I tried
+  <code class="code">(+ 3 1)</code>, and the REPL returned 4. So it works
+  as a calculator. I also created a few procedures and these worked
+  too.</p></div><div class="sect2" title="2.2 Not so simple Scheme - Fibonnaci"><div class="titlepage"><div><div><h3 class="title"><a id="id2629367"></a>2.2 Not so simple Scheme - Fibonnaci</h3></div></div></div><p>I decided to throw something a little more complicated at SISC - generating Fibonnanci numbers using recursion</p><pre class="programlisting">
+(define (fib n)
+  (if (&lt; n 2)
+      n
+      (+ (fib (- n 1)) (fib (- n 2)))))
+</pre><p>This didn't work out so well.  I was greeted with several compiler warnings:</p><pre class="screen">
+<code class="computeroutput">{warning: compiler detected application of non-procedure '0'.)</code>
+<code class="computeroutput">{warning: compiler detected application of non-procedure '0'.)</code>
+</pre><p>And when I tried to call this procedure, I got this:</p><pre class="screen">
+  <code class="computeroutput">Error: attempt to apply non-procedure '0'.</code>
+  <code class="computeroutput">console:10:24: &lt;indeterminate call&gt;</code>
+  <code class="computeroutput">console:10:24: &lt;from call to/argument of fib&gt;</code>
+  <code class="computeroutput">console:10:19: &lt;indeterminate call&gt;</code>
+  <code class="computeroutput">---------------------------</code>
+  <code class="computeroutput">To enable more detailed stack tracing, set the dynamic parameter max-stack-trace-depth to a non-zero value, e.g. 16.</code>
+  <code class="computeroutput">---------------------------</code>
+  <code class="computeroutput">Some stack trace entries may have been suppressed. To see all entries set the dynamic parameter suppressed-stack-trace-source-kinds to '().</code>
+</pre><p>Not good.</p></div><div class="sect2" title="2.3 Java class access"><div class="titlepage"><div><div><h3 class="title"><a id="id2630315"></a>2.3 Java class access</h3></div></div></div><p>The real question, though, is can the REPL interact with
+  Android's Java classes? Initially, I suspected that SISC
+  couldn't. One of SISC Scheme's dependencies is the
+  <a class="ulink" href="http://asm.objectweb.org/index.html" target="_top">ASM</a> Java
+  bytecode library, and Android uses Dalvik bytecode.</p><p>But I decided to give a try it anyway. To my surprise, I got
+  it to partly work. I started up the REPL, and tried it on the
+  benign class org.json.JSONArray which ships with Android:</p><pre class="programlisting">
+(import s2j)
+(define-java-class &lt;jjson-array&gt; |org.json.JSONArray|)
+(java-class? &lt;jjson-array&gt;)</pre><p>What I have done here is import the SISC module (s2j) that
+  allows me to interact with Java in Scheme. I create a
+  'scheme-name' -
+  <code class="literal">&lt;jjson-array&gt;</code> - and map it to the
+  JSONArray class. I finally ask if
+  <code class="literal">&lt;jjson-array&gt;</code> is indeed a Java class. The
+  REPL returns
+  <code class="computeroutput">#t</code>, SISC's Scheme representation of the true
+  value.</p></div><div class="sect2" title="2.4 Object instantiation"><div class="titlepage"><div><div><h3 class="title"><a id="id2630375"></a>2.4 Object instantiation</h3></div></div></div><p>Next I tried to instantiate it.</p><pre class="programlisting">
+(define json-array (java-new &lt;jjson-array&gt;))
+(java-object? json-array)</pre><p>Here I instantiate a &lt;jjson-array&gt; and assign it the
+  <code class="varname">json-array</code> identifier. I attempt to determine if it is indeed a
+  Java object by applying the java-object? procedure to it. The
+  REPL returns
+  <code class="computeroutput">#t</code>.</p><p>To my surprise, I just instantiated a Java object on
+  Android.</p></div><div class="sect2" title="2.5 Method invocation"><div class="titlepage"><div><div><h3 class="title"><a id="id2630415"></a>2.5 Method invocation</h3></div></div></div><p>But does this object really behave like the JSONArray
+  object? To test this, I had to apply a procedure to this object,
+  one which was mapped to a method on the JSONArray object.</p><pre class="programlisting">
+(define-generic-java-method length |length|)
+(length json-array)</pre><p>Here, I define a procedure called 'length', that, if the
+  object has a length method, will invoke that method. JSONArray has
+  a length method, so I apply it. The REPL returns
+  <code class="computeroutput">&lt;java int 0&gt;</code>, or the java integer value
+  for zero. It says that the array has no items in it.</p><p>Like JRuby I have just instantiated a Java object and
+  invoked a method on it, and retrieved the correct value. I tried
+  to manipulate it as well (add strings to it), and that worked
+  too.</p></div><div class="sect2" title="2.6 Android Java Classes"><div class="titlepage"><div><div><h3 class="title"><a id="id2630454"></a>2.6 Android Java Classes</h3></div></div></div><p>Things start to fail when I try to grab a hold of any of
+  the android.* classes. For SISC Scheme to instantiate those classes, I think SISC needs to be
+  embedded in a standalone app: an app similar to Charles Nutter's Ruboto IRB (<a class="ulink" href="http://github.com/headius/ruboto-irb" target="_top">
+  http://github.com/headius/ruboto-irb</a>).</p></div></div><div class="sect1" title="3. Conclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2630476"></a>3. Conclusion</h2></div></div></div><p>While I might be able to pull off creating something like Ruboto IRB for SISC Scheme, a fully functional
+ SISC REPL on the Dalvik VM is far from complete.  SISC's Scheme dependency on the ASM bytecode library
+is a major obstacle to overcome.  It's dependency on several Java beans not included in the Android SDK would also need to be
+addressed. Finally, there's those Sun dependencies to work around too (the reflection classes and the awt library).</p></div></div></body></html>
