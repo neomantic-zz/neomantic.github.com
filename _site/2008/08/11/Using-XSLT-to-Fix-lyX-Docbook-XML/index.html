@@ -10,23 +10,37 @@
      p{ padding-bottom:10px;}
      .date{ padding-bottom:10px;display:block;}
      #site-header{ font-size: 1.3em; font-weight: bold; padding: 20px 0 10px 0;}
+     #site-header a{text-decoration:none;}
+     #site-header a:hover {text-decoration:underline;}
      body{ font-family: Lucida Sans Unicode, Lucida Grande, sans-serif; }
      h1,h2{ font-size: 1.1em;font-weight:bold;}
+     h3 {font-size: 1.0em; font-weight:bold;}
      h2 {padding-top: 20px;}
+     ul li {list-style-type: disc;list-style-position:inside;}
+     ol li {list-style-type: decimal;list-style-position:inside;}
+	 #footer ul li{list-style-type:none; display:block; float:left; margin-right: 20px;padding-top: 20px;}
+	 #footer { border-top: 1px dotted #000; }
+	 #content { margin-bottom: 20px }
     </style>
 
 <title>Using XSLT to Fix lyX's Docbook XML</title>
   </head>
   <body>
     <div class="c_16">
-      <div class="g_16">
-	<div id="site-header">
-  <p>neomantic</p>
+      <div class="g_16" id="content">
+		<div id="site-header">
+  <p><a href="/">neomantic</a></p>
 </div>
 
-	<h1>Using XSLT to Fix lyX's Docbook XML</h1>
-	<p><a href='http://www.lyx.org/'>lyX</a> is currently my favorite text editor, especially when it comes to writing software documentation. LyX&#8217;s support for <a href='http://www.docbook.org/'>Docbook XML</a> is slightly cludgy, though, because the application is really designed to help create LaTex documents. I have written a tutorial on how to use lyX to produce Docbook XML which can be transformed into XHTML or PDF documents. This tutorial shows how to leverage XML technologies, such as XSL, to create customized versions of Docbook XSL stylesheets that fix some of lyX&#8217;s Docbook problems. The tutorial can be read <a href='/tutorials/lyx-and-docbookXML'>here</a>.</p>
+		<h1>Using XSLT to Fix lyX's Docbook XML</h1>
+		<p><a href='http://www.lyx.org/'>lyX</a> is currently my favorite text editor, especially when it comes to writing software documentation. LyX&#8217;s support for <a href='http://www.docbook.org/'>Docbook XML</a> is slightly cludgy, though, because the application is really designed to help create LaTex documents. I have written a tutorial on how to use lyX to produce Docbook XML which can be transformed into XHTML or PDF documents. This tutorial shows how to leverage XML technologies, such as XSL, to create customized versions of Docbook XSL stylesheets that fix some of lyX&#8217;s Docbook problems. The tutorial can be read <a href='/tutorials/lyx-and-docbookXML'>here</a>.</p>
       </div>
+	  <div id="footer" class="g_16">
+<ul class="g_6 prefix_6 alpha omega">
+<li><a href="#">gpg-key</a></li>
+<li><a href="#">contact</a></li>
+</ul>
+</div>
     </div>
   </body>
 </html>

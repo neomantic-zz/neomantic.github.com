@@ -10,22 +10,30 @@
      p{ padding-bottom:10px;}
      .date{ padding-bottom:10px;display:block;}
      #site-header{ font-size: 1.3em; font-weight: bold; padding: 20px 0 10px 0;}
+     #site-header a{text-decoration:none;}
+     #site-header a:hover {text-decoration:underline;}
      body{ font-family: Lucida Sans Unicode, Lucida Grande, sans-serif; }
      h1,h2{ font-size: 1.1em;font-weight:bold;}
+     h3 {font-size: 1.0em; font-weight:bold;}
      h2 {padding-top: 20px;}
+     ul li {list-style-type: disc;list-style-position:inside;}
+     ol li {list-style-type: decimal;list-style-position:inside;}
+	 #footer ul li{list-style-type:none; display:block; float:left; margin-right: 20px;padding-top: 20px;}
+	 #footer { border-top: 1px dotted #000; }
+	 #content { margin-bottom: 20px }
     </style>
 
 <title>XSL Stylesheet for GEDCOM 5.5 XML</title>
   </head>
   <body>
     <div class="c_16">
-      <div class="g_16">
-	<div id="site-header">
-  <p>neomantic</p>
+      <div class="g_16" id="content">
+		<div id="site-header">
+  <p><a href="/">neomantic</a></p>
 </div>
 
-	<h1>XSL Stylesheet for GEDCOM 5.5 XML</h1>
-	<p>I just released a XSL stylsheet that can be applied to a GEDCOM 5.5 XML document. It will produce an XSL-FO stylesheet that can in turn be converted by fop into a pdf document. The PDF resembles forms produced by ProGenealogist.com.</p>
+		<h1>XSL Stylesheet for GEDCOM 5.5 XML</h1>
+		<p>I just released a XSL stylsheet that can be applied to a GEDCOM 5.5 XML document. It will produce an XSL-FO stylesheet that can in turn be converted by fop into a pdf document. The PDF resembles forms produced by ProGenealogist.com.</p>
 
 <p>For more information:</p>
 
@@ -33,6 +41,12 @@
 <li><a href='/software/ged55XMLtoFamilyForm/'>ged55XMLtoFamilyForm.xsl</a></li>
 </ul>
       </div>
+	  <div id="footer" class="g_16">
+<ul class="g_6 prefix_6 alpha omega">
+<li><a href="#">gpg-key</a></li>
+<li><a href="#">contact</a></li>
+</ul>
+</div>
     </div>
   </body>
 </html>
