@@ -4,7 +4,7 @@ layout: post
 ---
 It's been a while since I've posted anything, but I'm going to start
 posting about personal projects that have worked on over the years,
-as a publish them on my [github account](https://github.com/neomanticx).
+as a publish them on my [github account](https://github.com/neomantic).
 
 The first project I have pushed to github is called
 ["Announce My Agenda"](https://github.com/neomantic/announce-my-agenda-app). It's
