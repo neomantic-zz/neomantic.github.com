@@ -34,6 +34,40 @@
       <div>
 
 <h2>
+  <a href="/2014/08/24/helm-rubygems-org//" title="helm-rubygems-org">
+    helm-rubygems-org
+  </a>
+</h2>
+<div class="entry-content">
+<span class="date" title="2014-08-24T00:00:00+09:00">
+  <span class="published">Posted: </span>
+  <span class="day">24</span>
+  <span class="month">
+    <abbr>Aug</abbr>
+  </span>
+  <span class="year">2014</span>
+</span>
+<p>Today, I’ve released my first Emacs package. It is a
+<a href="https://github.com/emacs-helm/helm">helm</a> source for searching
+gems on <a href="http://rubygems.org">rubygems.org</a>. When provided a search
+pattern, the package uses rubygems.org’s API to search gem names
+that match the pattern. Helm, then, presents a list of possible gems.
+Simply selecting an item in this list, and pressing the return key
+saves a description of the gem suitable for a Gemfile to the kill ring; e.g.,
+gem ‘guard-rackunit’, ‘~&gt; 1.0.0’.</p>
+
+<p>The package can be installed using Emacs’ package manager. The package
+is accessible via <a href="http://melpa.milkbox.net">melpa</a>.</p>
+
+<p>The melpa page is <a href="http://melpa.milkbox.net/#/helm-rubygems-org">here</a>,
+but the best reference can be found in the package’s source code
+respository on <a href="https://github.com/neomantic/helm-rubygems-org">github</a></p>
+
+<p>The README has details for how to setup and use this helm source.</p>
+
+</div> <!-- /.entry-content -->
+
+<h2>
   <a href="/2014/03/09/Guard-Rackinit-Gem//" title="guard-rackunit gem">
     guard-rackunit gem
   </a>
@@ -47,9 +81,15 @@
   </span>
   <span class="year">2014</span>
 </span>
-<p>After all the gems I’ve written for my employer, I’m finally releasing one of my own: <a href="https://rubygems.org/gems/guard-rackunit">guard-rackunit</a>. The gem is a <a href="https://github.com/guard/">Guard</a> plugin which runs <a href="http:/racket-lang.org">Racket’s</a> <a href="http://docs.racket-lang.org/rackunit/index.html">RackUnit</a> unit tests.</p>
+<p>After all the gems I’ve written for my employer, I’m finally releasing one
+of my own: <a href="https://rubygems.org/gems/guard-rackunit">guard-rackunit</a>.
+The gem is a <a href="https://github.com/guard/">Guard</a> plugin which runs
+<a href="http:/racket-lang.org">Racket’s</a> <a href="http://docs.racket-lang.org/rackunit/index.html">RackUnit</a> unit tests.</p>
 
-<p>The source code is hosted on <a href="https://github.com/neomantic/guard-rackunit">github</a>. Consult the README for details about installing and running the gem.</p>
+<p>The source code is hosted on
+<a href="https://github.com/neomantic/guard-rackunit">github</a>. Consult the
+README for details about installing and running the gem.</p>
+
 </div> <!-- /.entry-content -->
 
 <h2>
@@ -66,13 +106,24 @@
   </span>
   <span class="year">2014</span>
 </span>
-<p>It’s been a while since I’ve posted anything, but I’m going to start posting about personal projects that have worked on over the years, as a publish them on my <a href="https://github.com/neomantic">github account</a>.</p>
+<p>It’s been a while since I’ve posted anything, but I’m going to start
+posting about personal projects that have worked on over the years,
+as a publish them on my <a href="https://github.com/neomantic">github account</a>.</p>
 
-<p>The first project I have pushed to github is called <a href="https://github.com/neomantic/announce-my-agenda-app">“Announce My Agenda”</a>. It’s an Android app that uses Android’s Text-to-Speech capability to read out-loud your day’s agenda, given the Google calendars you have selected, and the invitations your have accepted. It was written over a year, and I never gave it the final polish to publish it in Google’s Play store.</p>
+<p>The first project I have pushed to github is called
+<a href="https://github.com/neomantic/announce-my-agenda-app">“Announce My Agenda”</a>. It’s
+an Android app that uses Android’s Text-to-Speech capability to read
+out-loud your day’s agenda, given the Google calendars you have
+selected, and the invitations your have accepted. It was written over a
+year, and I never gave it the final polish to publish it in Google’s
+Play store.</p>
 
 <p>I’m releasing it under the GPLv3 license.</p>
 
-<p>Please keep in mind that I’m not a Java developer, but a Ruby developer by profession, so this might not be the most elegant Java code. The app, though, is nearly fully functional.</p>
+<p>Please keep in mind that I’m not a Java developer, but a Ruby
+developer by profession, so this might not be the most elegant Java
+code. The app, though, is nearly fully functional.</p>
+
 </div> <!-- /.entry-content -->
 
 <h2>
@@ -89,7 +140,12 @@
   </span>
   <span class="year">2011</span>
 </span>
-<p>I have scrapped the original Radiant site for a <a href="http://github.com/mojombo/jekyll">Jekyll</a> static site. Jekyll is fantastic. The original styles have been thrown out too. Both changes are designed to make the site easier to update and maintain. Many of the site’s pages do not match the home page/post styles, but resemble docbook html pages; that’s because they are. I doubt I’ll ever migrate them.</p>
+<p>I have scrapped the original Radiant site for a <a href="http://github.com/mojombo/jekyll">Jekyll</a> static site.
+Jekyll is fantastic.  The original styles have been thrown out too.  Both changes are designed to
+make the site easier to update and maintain.  Many of the site’s pages do not match
+the home page/post styles, but resemble docbook html pages; that’s because they are.
+I doubt I’ll ever migrate them.</p>
+
 </div> <!-- /.entry-content -->
 
 <h2>
@@ -106,11 +162,15 @@
   </span>
   <span class="year">2010</span>
 </span>
-<p>I managed to invoke REPL on Android’s Dalvik VM. I encountered a number a problems, but amazingly I managed to get the REPL to instantiate and manipulate a Java class that ships with the Android OS.</p>
+<p>I managed to invoke REPL on Android’s Dalvik VM. I encountered a
+number a problems, but amazingly I managed to get the REPL to
+instantiate and manipulate a Java class that ships with the Android OS.</p>
 
 <p>As far as I know, this is the first time that anyone has managed to get a Scheme implementation to run on Android</p>
 
 <p><a href="/tutorials/sisc-scheme-on-androids-dalvik-vm">Read this tutorial if you want to find out how I did it.</a></p>
+
+
 </div> <!-- /.entry-content -->
 
 <h2>
@@ -127,13 +187,18 @@
   </span>
   <span class="year">2008</span>
 </span>
-<p>I just released a XSL stylsheet that can be applied to a GEDCOM 5.5 XML document. It will produce an XSL-FO stylesheet that can in turn be converted by fop into a pdf document. The PDF resembles forms produced by ProGenealogist.com.</p>
+<p>I just released a XSL stylsheet that can be applied to a
+GEDCOM 5.5 XML document. It will produce an XSL-FO
+stylesheet that can in turn be converted by fop into a pdf document.
+The PDF resembles forms produced by ProGenealogist.com.</p>
 
 <p>For more information:</p>
 
 <ul>
-<li><a href="/software/ged55XMLtoFamilyForm/">ged55XMLtoFamilyForm.xsl</a></li>
+  <li><a href="/software/ged55XMLtoFamilyForm/">ged55XMLtoFamilyForm.xsl</a></li>
 </ul>
+
+
 </div> <!-- /.entry-content -->
 
 <h2>
@@ -150,7 +215,17 @@
   </span>
   <span class="year">2008</span>
 </span>
-<p><a href="http://www.lyx.org/">lyX</a> is currently my favorite text editor, especially when it comes to writing software documentation. LyX’s support for <a href="http://www.docbook.org/">Docbook XML</a> is slightly cludgy, though, because the application is really designed to help create LaTex documents. I have written a tutorial on how to use lyX to produce Docbook XML which can be transformed into XHTML or PDF documents. This tutorial shows how to leverage XML technologies, such as XSL, to create customized versions of Docbook XSL stylesheets that fix some of lyX’s Docbook problems. The tutorial can be read <a href="/tutorials/lyx-and-docbookXML">here</a>.</p>
+<p><a href="http://www.lyx.org/">lyX</a> is currently my favorite text editor,
+especially when it comes to writing software documentation. LyX’s
+support for <a href="http://www.docbook.org/">Docbook XML</a> is slightly cludgy, though, because the application is really
+designed to help create LaTex documents. I have written a tutorial
+on how to use lyX to produce Docbook XML which can be transformed
+into XHTML or PDF documents. This tutorial shows how to
+leverage XML technologies, such as XSL, to create customized versions
+of Docbook XSL stylesheets that fix some of lyX’s Docbook problems.
+The tutorial can be read <a href="/tutorials/lyx-and-docbookXML">here</a>.</p>
+
+
 </div> <!-- /.entry-content -->
 
 <h2>
@@ -167,13 +242,15 @@
   </span>
   <span class="year">2008</span>
 </span>
-<p>I have just released a Ruby Script that will download your Google Contacts using their Contacts API.</p>
+<p>I have just released a Ruby Script that will download your
+ Google Contacts using their Contacts API.</p>
 
 <ul>
-<li><a href="/software/ruby-google-contacts/">downloadGoogleContacts.rb</a></li>
+  <li><a href="/software/ruby-google-contacts/">downloadGoogleContacts.rb</a></li>
 </ul>
 
 <p>Enjoy!</p>
+
 </div> <!-- /.entry-content -->
 
 <h2>
@@ -193,8 +270,9 @@
 <p>I am pleased to announce the release of a Usplash screen branded for the Debian GNU/Linux distribution</p>
 
 <ul>
-<li><a href="/usplash-themes">Usplash Debian Swirl</a></li>
+  <li><a href="/usplash-themes">Usplash Debian Swirl</a></li>
 </ul>
+
 </div> <!-- /.entry-content -->
 
 </div>
