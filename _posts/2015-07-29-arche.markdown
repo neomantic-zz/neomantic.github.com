@@ -1,5 +1,5 @@
 ---
-title: Hypermedia Discovery Service in Clojure - arche
+title: arche - a Hypermedia Discovery Service written in Clojure
 layout: post
 ---
 
