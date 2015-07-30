@@ -1,0 +1,26 @@
+---
+title: Hypermedia Discovery Service in Clojure - arche
+layout: post
+---
+
+Nearly a year ago, I started a project to teach myself
+[Clojure](http://clojure.org).  It's been feature complete for a very
+long time now. I had just neglected to announce its availability.
+
+The project is called [arche](https://github.com/emacs-helm/helm). It
+is a hypermedia resource discovery service. A full description of the
+design is described
+[here](https://github.com/neomantic/arche/blob/develop/design.md). (The
+project itself, incidentally, is an exact duplicate of a project I
+wrote in Ruby on Rails for my current company).
+
+The following Clojure libraries were used to build the Clojure version:
+
+1. [liberator](http://clojure-liberator.github.io/liberator/) - state-machine API framework
+2. [compojure](https://github.com/weavejester/compojure) - Equivalent to Ruby's Sinatra micro-framework
+3. [ring](https://github.com/ring-clojure/ring) - Equivalent to Ruby's Rack
+4. [speclj](https://github.com/slagyr/speclj) - like Rspec
+5. [lein-cucumber](https://github.com/nilswloka/lein-cucumber)
+6. [environ](https://github.com/weavejester/environ) - instant 12-factor app-ness
+<p/>
+The overall experience was fantastic. I've programmed in  [Scheme](http://www.scheme.com/tspl4/), [Racket](http://racket-lang.org/), and Emacs Lisp, and Clojure was a pleasure. Clojure's syntax and the APIs of it's data structures are clear and concise. Its Java interop mode is suprisingly pleasant. A programmer literally needs some Lisp background and this [cheatsheet](http://clojure.org/cheatsheet) and the rest is fairly straightforward.
