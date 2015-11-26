@@ -7,7 +7,7 @@ Nearly a year ago, I started a project to teach myself
 [Clojure](http://clojure.org).  It's been feature complete for a very
 long time now. I had just neglected to announce its availability.
 
-The project is called [arche](https://github.com/emacs-helm/helm). It
+The project is called [arche](https://github.com/neomantic/arche). It
 is a hypermedia resource discovery service. A full description of the
 design is described
 [here](https://github.com/neomantic/arche/blob/develop/design.md). (The
