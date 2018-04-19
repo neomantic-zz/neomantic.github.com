@@ -1,24 +1,10 @@
----
-layout: base
-title: Neomantic
----
-<div>
-{% for post in site.posts %}
-<h2>
-  <a href="{{ post.url }}/" title="{{ post.title }}">
-    {{ post.title }}
-  </a>
-</h2>
-<div class="entry-content">
-<span class="date" title="{{ post.date | date_to_xmlschema }}">
-  <span class="published">Posted: </span>
-  <span class="day">{{ post.date | date: '%d' }}</span>
-  <span class="month">
-    <abbr>{{ post.date | date: '%b' }}</abbr>
-  </span>
-  <span class="year">{{ post.date | date: '%Y' }}</span>
-</span>
-{{ post.content }}
-</div> <!-- /.entry-content -->
-{% endfor %}
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>neomantic</title>
+  </head>
+  <body>
+    <p><a href="https://www.neomantic.com">www.neomantic.com</a><p>
+  </body>
+</html>
